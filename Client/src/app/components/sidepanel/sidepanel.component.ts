@@ -24,6 +24,11 @@ export class SidepanelComponent implements OnInit {
   setCommand() {
 
   }
+  clearSelction() {
+    this.featureCount = 0;
+    this.selectedFeature = null;
+    this.command = "No feature selected , please select a feature from map by single click";
+  }
   onExportClick() {
     this.apiService.postData(this.selectedFeature).subscribe((result: any) => {
       if (result.Success) {

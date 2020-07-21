@@ -6,7 +6,9 @@
     </small>
     
     <div class="mt-3">
-      <button type="button" class="btn btn-secondary" (click)="onExportClick()">Export</button>
+      <button  [disabled]="featureCount==0" type="button" class="btn btn-secondary" (click)="onExportClick()">Export</button>
+      <button *ngIf="featureCount" type="button" (click)="clearSelction()" class="btn btn-info ml-3">Clear</button>
+
     </div>
   </div>
 </div>
