@@ -42,15 +42,19 @@ app.post("/downloadfile", (req, response) => {
       .format("ESRI Shapefile")
       .skipfailures()
       .stream();
-    shapefile.pipe(fs.createWriteStream(newFileName));
-    let responeText = {
-      Success: true,
-      Data: {
-        fileCreated: true,
-      },
-    };
+    let stream = fs.createWriteStream(newFileName);
+    shapefile.pipe(stream);
+    stream.on("finish", () => {
+      let responeText = {
+        Success: true,
+        Data: {
+          fileCreated: true,
+        },
+      };
 
-    response.send(JSON.stringify(responeText));
+      response.send(JSON.stringify(responeText));
+    });
+
     //responseFile("shapefilenew.zip", response);
   });
 
